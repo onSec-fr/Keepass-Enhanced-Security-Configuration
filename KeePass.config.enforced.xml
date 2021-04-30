@@ -47,7 +47,7 @@
 			<MinimumQuality>80</MinimumQuality>
 		</MasterPassword>
 		<!-- Enable Secure Desktop (ref https://keepass.info/help/kb/sec_desk.html)  -->
-		<MasterKeyOnSecureDesktop>false</MasterKeyOnSecureDesktop>
+		<MasterKeyOnSecureDesktop>true</MasterKeyOnSecureDesktop>
 		<!-- Clear clipboard after x sec -->
 		<ClipboardClearAfterSeconds>10</ClipboardClearAfterSeconds>
 		<!-- Protect Keepass process with DACL - Use with caution - -->
