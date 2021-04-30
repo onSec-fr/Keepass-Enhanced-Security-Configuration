@@ -25,10 +25,10 @@ To do this we will use the [enforced configuration file](https://keepass.info/he
 ### General considerations
 In order to further secure your installation, please remember to apply the following recommendations: 
 
-- Download KeePass **from its official website** only (https://keepass.info) and **check the integrity of the downloaded file** at https://keepass.info/integrity.html.
+- Download KeePass **[from its official website](https://keepass.info "from its official website")** only and **[check the integrity of the downloaded file](https://keepass.info/integrity.html "check the integrity of the downloaded file")**.
 - **Secure your KeePass installation directory** so that only your user account can write to it (to protect the integrity of your configuration file).
 - **Increase the number of iterations of the derivation key** used to encrypt your database (default is 60000).
-- **Secure your database with a key file** in addition to the master password: https://keepass.info/help/base/keys.html#keyfiles. Note that the key file should not be stored in the same location as your database.
+- **Secure your database [with a key file](https://keepass.info/help/base/keys.html#keyfiles "with a key file")** in addition to the master password. Note that the key file should not be stored in the same location as your database.
 
 ### Configuration file
 From [official documentation ](https://keepass.info/help/kb/config_enf.html#info "official documentation "): 
