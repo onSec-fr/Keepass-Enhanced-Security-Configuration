@@ -2,7 +2,7 @@
 
 **Make your keepass more secure** using the not very-well known KeePass enforced configuration file. 
 
-![](https://raw.githubusercontent.com/onSec-fr/Keepass-Enhanced-Security-Configuration/main/icon.ico?token=AOI5A4YP6537BK24ZKKOBKDARO472)
+![](https://raw.githubusercontent.com/onSec-fr/Keepass-Enhanced-Security-Configuration/main/icon.ico)
 
 - [KeePass Enhanced Security Configuration](#keepass-enhanced-security-configuration)
     + [Introduction](#introduction)
