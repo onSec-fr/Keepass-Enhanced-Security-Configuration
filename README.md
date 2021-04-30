@@ -33,8 +33,8 @@ In order to further secure your installation, please remember to apply the follo
 ### Configuration file
 From [official documentation ](https://keepass.info/help/kb/config_enf.html#info "official documentation "): 
 > The format of an enforced configuration file is basically the same as the format of a regular configuration file. An enforced configuration file must be stored in the KeePass application directory (which contains KeePass.exe). Its name depends on the KeePass edition:
-- KeePass 1.x: KeePass.enforced.ini.
-- KeePass 2.x: KeePass.config.enforced.xml.
+> - KeePass 1.x: KeePass.enforced.ini.
+> - KeePass 2.x: KeePass.config.enforced.xml.
 
 #### Sample file
 Here is an example file, which embeds most of the important security mechanisms, and disables dangerous features :
