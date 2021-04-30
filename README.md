@@ -113,6 +113,15 @@ Here is an example file, which embeds most of the important security mechanisms,
 	</Integration>
 </Configuration>
 ```
+#### Screenshots
+- As you can see the settings are now enforced :
+[![](https://github.com/onSec-fr/Keepass-Enhanced-Security-Configuration/blob/main/res/enforced_settings.png?raw=true)](https://github.com/onSec-fr/Keepass-Enhanced-Security-Configuration/blob/main/res/enforced_settings.png?raw=true)
+
+- KeePass process is now protected from dumping and alteration :
+[![](https://github.com/onSec-fr/Keepass-Enhanced-Security-Configuration/blob/main/res/after_dacl_protect.png?raw=true)](https://github.com/onSec-fr/Keepass-Enhanced-Security-Configuration/blob/main/res/after_dacl_protect.png?raw=true)
+
+- Plugins and others specified settings are now disallowed :
+[![](https://github.com/onSec-fr/Keepass-Enhanced-Security-Configuration/blob/main/res/disallowed.png?raw=true)](https://github.com/onSec-fr/Keepass-Enhanced-Security-Configuration/blob/main/res/disallowed.png?raw=true)
 
 #### More settings
 The settings are poorly documented, but if you want to play around, there is a way :
