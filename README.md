@@ -1,2 +1,131 @@
-# Keepass-Enhanced-Security-Configuration
-Make your keepass more secure using the not very-well known, poorly documented enforced configuration file.
+# KeePass Enhanced Security Configuration 
+
+**Make your keepass more secure** using the not very-well known KeePass enforced configuration file. 
+
+![](https://raw.githubusercontent.com/onSec-fr/Keepass-Enhanced-Security-Configuration/main/icon.ico?token=AOI5A4YP6537BK24ZKKOBKDARO472)
+
+- [KeePass Enhanced Security Configuration](#keepass-enhanced-security-configuration)
+    + [Introduction](#introduction)
+    + [General considerations](#general-considerations)
+    + [Configuration file](#configuration-file)
+      - [Sample file](#sample-file)
+      - [More settings](#more-settings)
+    + [References](#references)
+
+### Introduction
+[KeePass](https://keepass.info "KeePass") is a great tool to store your passwords securely (the best in my opinion).
+
+On the other hand its popularity leads to a risk since there are [many ways to attack Keepass](https://www.harmj0y.net/blog/redteaming/keethief-a-case-study-in-attacking-keepass-part-2/ "many ways to attack Keepass") nowadays.
+Furthermore the large number of features increases the potential attack surface.
+
+So the goal is to limit some features you don't need and to activate all security mechanisms that are not activated by default.
+
+To do this we will use the [enforced configuration file](https://keepass.info/help/kb/config_enf.html "enforced configuration file"), which is an official KeePass feature.
+
+### General considerations
+In order to further secure your installation, please remember to apply the following recommendations: 
+
+- Download KeePass **from its official website** only (https://keepass.info) and **check the integrity of the downloaded file** at https://keepass.info/integrity.html.
+- **Secure your KeePass installation directory** so that only your user account can write to it (to protect the integrity of your configuration file).
+- **Increase the number of iterations of the derivation key** used to encrypt your database (default is 60000).
+- **Secure your database with a key file** in addition to the master password: https://keepass.info/help/base/keys.html#keyfiles. Note that the key file should not be stored in the same location as your database.
+
+### Configuration file
+From [official documentation ](https://keepass.info/help/kb/config_enf.html#info "official documentation "): 
+> The format of an enforced configuration file is basically the same as the format of a regular configuration file. An enforced configuration file must be stored in the KeePass application directory (which contains KeePass.exe). Its name depends on the KeePass edition:
+- KeePass 1.x: KeePass.enforced.ini.
+- KeePass 2.x: KeePass.config.enforced.xml.
+
+#### Sample file
+Here is an example file, which embeds most of the important security mechanisms, and disables dangerous features :
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<Configuration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<!-- Ref https://keepass.info/help/kb/config_enf.html -->
+	<Application>
+		<!-- Disable triggers -->
+		<TriggerSystem>
+			<Enabled>false</Enabled>
+			<Triggers MergeContentMode="Replace" />
+		</TriggerSystem>
+		<!-- Disable automatic update -->
+		<Start>
+			<CheckForUpdate>false</CheckForUpdate>
+			<CheckForUpdateConfigured>true</CheckForUpdateConfigured>
+		</Start>
+	</Application>
+	<!-- Specifying UI Element States : https://keepass.info/help/v2_dev/customize.html#uiflags -->
+	<UI>
+		<!-- Disable 'Help' → 'Check for Updates' menu item. -->
+		<UIFlags>32</UIFlags>
+	</UI>
+	<Security>
+		<!-- Edit Policy -->
+		<Policy>
+			<ChangeMasterKeyNoKey>false</ChangeMasterKeyNoKey>
+			<PrintNoKey>false</PrintNoKey>
+			<EditTriggers>false</EditTriggers>
+			<Plugins>false</Plugins>
+			<Export>false</Export>
+			<ExportNoKey>false</ExportNoKey>
+			<Import>false</Import>
+			<Print>false</Print>
+			<CopyWholeEntries>false</CopyWholeEntries>
+			<DragDrop>false</DragDrop>
+			<UnhidePasswords>false</UnhidePasswords>
+		</Policy>
+		<!-- Enforce automatic locking -->
+		<WorkspaceLocking>
+			<LockOnSessionSwitch>true</LockOnSessionSwitch>
+			<LockOnSuspend>true</LockOnSuspend>
+			<LockAfterTime>3600</LockAfterTime>
+			<LockAfterGlobalTime>600</LockAfterGlobalTime>
+			<LockOnRemoteControlChange>true</LockOnRemoteControlChange>
+		</WorkspaceLocking>
+		<!-- Master password requirements -->
+		<MasterPassword>
+			<MinimumLength>16</MinimumLength>
+			<MinimumQuality>80</MinimumQuality>
+		</MasterPassword>
+		<!-- Enable Secure Desktop (ref https://keepass.info/help/kb/sec_desk.html)  -->
+		<MasterKeyOnSecureDesktop>false</MasterKeyOnSecureDesktop>
+		<!-- Clear clipboard after x sec -->
+		<ClipboardClearAfterSeconds>10</ClipboardClearAfterSeconds>
+		<!-- Protect Keepass process with DACL - Use with caution - -->
+		<ProtectProcessWithDacl>true</ProtectProcessWithDacl>
+		<!-- Prevent Screen Capture - Use with caution - -->
+		<PreventScreenCapture>true</PreventScreenCapture>
+	</Security>P
+	<!-- Replace default password generator -->
+	<PasswordGenerator>
+		<AutoGeneratedPasswordsProfile>
+			<GeneratorType>CharSet</GeneratorType>
+			<Length>12</Length>
+			<CharSetRanges>ULDS______</CharSetRanges>
+			<ExcludeLookAlike>true</ExcludeLookAlike>
+			<NoRepeatingCharacters>true</NoRepeatingCharacters>
+		</AutoGeneratedPasswordsProfile>
+	</PasswordGenerator>
+	<!-- Enforce Proxy configuration -->
+	<Integration>
+		<ProxyType>System</ProxyType>
+		<ProxyAuthType>Auto</ProxyAuthType>
+	</Integration>
+</Configuration>
+```
+
+#### More settings
+The settings are poorly documented, but if you want to play around, there is a way :
+> In order to create an enforced configuration file, we recommend the following procedure:
+1. Download the portable ZIP package of KeePass and unpack it. Run KeePass, configure everything as you wish, and exit it.
+2. Rename the configuration file to the enforced configuration file name.
+3. Open the enforced configuration file with a text editor and delete all settings that you do not want to enforce.
+
+### References
+- Official KeePass Website : https://keepass.info
+- Enforced configuration official documentation : https://keepass.info/help/kb/config_enf.html
+- Customization official documentation : https://keepass.info/help/v2_dev/customize.html
+- A case study in Attacking KeePass : https://www.harmj0y.net/blog/redteaming/keethief-a-case-study-in-attacking-keepass-part-2/
+- Another case study in Attacking Keepass : https://www.slideshare.net/harmj0y/a-case-study-in-attacking-keepass
+
+[@onSec-fr](https://github.com/onSec-fr "@onSec-fr")
