@@ -117,9 +117,9 @@ Here is an example file, which embeds most of the important security mechanisms,
 #### More settings
 The settings are poorly documented, but if you want to play around, there is a way :
 > In order to create an enforced configuration file, we recommend the following procedure:
-1. Download the portable ZIP package of KeePass and unpack it. Run KeePass, configure everything as you wish, and exit it.
-2. Rename the configuration file to the enforced configuration file name.
-3. Open the enforced configuration file with a text editor and delete all settings that you do not want to enforce.
+> 1. Download the portable ZIP package of KeePass and unpack it. Run KeePass, configure everything as you wish, and exit it.
+> 2. Rename the configuration file to the enforced configuration file name.
+> 3. Open the enforced configuration file with a text editor and delete all settings that you do not want to enforce.
 
 ### References
 - Official KeePass Website : https://keepass.info
