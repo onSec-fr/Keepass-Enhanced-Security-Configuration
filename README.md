@@ -9,6 +9,7 @@
     + [General considerations](#general-considerations)
     + [Configuration file](#configuration-file)
       - [Sample file](#sample-file)
+      - [Screenshots](#screenshots)
       - [More settings](#more-settings)
     + [References](#references)
 
@@ -115,12 +116,15 @@ Here is an example file, which embeds most of the important security mechanisms,
 ```
 #### Screenshots
 - As you can see the settings are now enforced :
+
 [![](https://github.com/onSec-fr/Keepass-Enhanced-Security-Configuration/blob/main/res/enforced_settings.png?raw=true)](https://github.com/onSec-fr/Keepass-Enhanced-Security-Configuration/blob/main/res/enforced_settings.png?raw=true)
 
 - KeePass process is now protected from dumping and alteration :
+
 [![](https://github.com/onSec-fr/Keepass-Enhanced-Security-Configuration/blob/main/res/after_dacl_protect.png?raw=true)](https://github.com/onSec-fr/Keepass-Enhanced-Security-Configuration/blob/main/res/after_dacl_protect.png?raw=true)
 
 - Plugins and others specified settings are now disallowed :
+
 [![](https://github.com/onSec-fr/Keepass-Enhanced-Security-Configuration/blob/main/res/disallowed.png?raw=true)](https://github.com/onSec-fr/Keepass-Enhanced-Security-Configuration/blob/main/res/disallowed.png?raw=true)
 
 #### More settings
