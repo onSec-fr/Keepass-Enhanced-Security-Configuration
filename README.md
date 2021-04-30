@@ -2,7 +2,7 @@
 
 **Make your keepass more secure** using the not very-well known KeePass enforced configuration file. 
 
-![](https://github.com/onSec-fr/Keepass-Enhanced-Security-Configuration/blob/main/icon.ico?raw=true)
+![](https://github.com/onSec-fr/Keepass-Enhanced-Security-Configuration/blob/main/res/icon.ico?raw=true)
 
 - [KeePass Enhanced Security Configuration](#keepass-enhanced-security-configuration)
     + [Introduction](#introduction)
@@ -88,7 +88,7 @@ Here is an example file, which embeds most of the important security mechanisms,
 			<MinimumQuality>80</MinimumQuality>
 		</MasterPassword>
 		<!-- Enable Secure Desktop (ref https://keepass.info/help/kb/sec_desk.html)  -->
-		<MasterKeyOnSecureDesktop>false</MasterKeyOnSecureDesktop>
+		<MasterKeyOnSecureDesktop>true</MasterKeyOnSecureDesktop>
 		<!-- Clear clipboard after x sec -->
 		<ClipboardClearAfterSeconds>10</ClipboardClearAfterSeconds>
 		<!-- Protect Keepass process with DACL - Use with caution - -->
