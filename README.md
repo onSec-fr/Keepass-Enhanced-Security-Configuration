@@ -125,7 +125,8 @@ The settings are poorly documented, but if you want to play around, there is a w
 - Official KeePass Website : https://keepass.info
 - Enforced configuration official documentation : https://keepass.info/help/kb/config_enf.html
 - Customization official documentation : https://keepass.info/help/v2_dev/customize.html
-- A case study in Attacking KeePass : https://www.harmj0y.net/blog/redteaming/keethief-a-case-study-in-attacking-keepass-part-2/
-- Another case study in Attacking Keepass : https://www.slideshare.net/harmj0y/a-case-study-in-attacking-keepass
+- A case study in Attacking KeePass (by @HarmJ0y) : https://www.harmj0y.net/blog/redteaming/keethief-a-case-study-in-attacking-keepass-part-2/
+- Another case study in Attacking Keepass (by @HarmJ0y) : https://www.slideshare.net/harmj0y/a-case-study-in-attacking-keepass
+
 
 [@onSec-fr](https://github.com/onSec-fr "@onSec-fr")
