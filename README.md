@@ -79,8 +79,8 @@ Here is an example file, which embeds most of the important security mechanisms,
 		<WorkspaceLocking>
 			<LockOnSessionSwitch>true</LockOnSessionSwitch>
 			<LockOnSuspend>true</LockOnSuspend>
-			<LockAfterTime>3600</LockAfterTime>
-			<LockAfterGlobalTime>600</LockAfterGlobalTime>
+			<LockAfterTime>600</LockAfterTime>
+			<LockAfterGlobalTime>3600</LockAfterGlobalTime>
 			<LockOnRemoteControlChange>true</LockOnRemoteControlChange>
 		</WorkspaceLocking>
 		<!-- Master password requirements -->
