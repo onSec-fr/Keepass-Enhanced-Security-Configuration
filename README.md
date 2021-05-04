@@ -12,6 +12,8 @@
       - [Screenshots](#screenshots)
       - [More settings](#more-settings)
     + [Automatic installation](#automatic-installation)
+      - [Parameters](#parameters)
+      - [Run](#run)
     + [References](#references)
 
 ### Introduction
