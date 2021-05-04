@@ -151,8 +151,8 @@ What the script does:
 - **EnforceACL** Optional - secure KeePass installation directory using ACLs (Default : True).
 
 #### Run
-Default -> `.\KeePass_Secure_Auto_Install.ps1`
-Custom-> `.\KeePass_Secure_Auto_Install.ps1 -ConfigFile "C:\path\to\file.xml" -EnforceACL $False`
+- Default -> `.\KeePass_Secure_Auto_Install.ps1`
+- Custom-> `.\KeePass_Secure_Auto_Install.ps1 -ConfigFile "C:\path\to\file.xml" -EnforceACL $False`
 
 [![](https://github.com/onSec-fr/Keepass-Enhanced-Security-Configuration/blob/main/res/auto_install.png?raw=true)](https://github.com/onSec-fr/Keepass-Enhanced-Security-Configuration/blob/main/res/auto_install.png?raw=true)
 
