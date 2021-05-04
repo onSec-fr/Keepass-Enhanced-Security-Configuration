@@ -141,10 +141,10 @@ The settings are poorly documented, but if you want to play around, there is a w
 You can use the **KeePass_Secure_Auto_Install.ps1** file to install and configure KeePass automatically !
 
 What the script does:
-- Download the latest version of KeePass from its official website
-- Checks the integrity of the file by comparing its hash
-- Copy the enforced configuration file
-- Alter permissions on the KeePass installation folder
+1. Download the latest version of KeePass from its official website
+2. Checks the integrity of the file by comparing its hash
+3. Copy the enforced configuration file
+4. Alter permissions on the KeePass installation folder
 
 #### Parameters
 - **ConfigFile** : Optional - path to the KeePass.config.enforced.xml (Default : .\KeePass.config.enforced.xml).
