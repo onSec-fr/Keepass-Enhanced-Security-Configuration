@@ -1,6 +1,6 @@
 # KeePass Enhanced Security Configuration 
 
-**Make your keepass more secure** using the not very-well known KeePass enforced configuration file. 
+**Make your keepass more secure** using the not very-well known KeePass enforced configuration file and some tweaking.
 
 ![](https://github.com/onSec-fr/Keepass-Enhanced-Security-Configuration/blob/main/res/icon.ico?raw=true)
 
