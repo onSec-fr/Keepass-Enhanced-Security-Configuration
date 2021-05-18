@@ -7,13 +7,13 @@
 - [KeePass Enhanced Security Configuration](#keepass-enhanced-security-configuration)
     + [Introduction](#introduction)
     + [General considerations](#general-considerations)
+	+ [Automatic installation](#automatic-installation)
+      - [Parameters](#parameters)
+      - [Run](#run)
     + [Configuration file](#configuration-file)
       - [Sample file](#sample-file)
       - [Screenshots](#screenshots)
       - [More settings](#more-settings)
-    + [Automatic installation](#automatic-installation)
-      - [Parameters](#parameters)
-      - [Run](#run)
     + [References](#references)
 
 ### Introduction
@@ -33,6 +33,25 @@ In order to further secure your installation, please remember to apply the follo
 - **Secure your KeePass installation directory** so that only your user account can write to it (to protect the integrity of your configuration file).
 - **Increase the number of iterations of the derivation key** used to encrypt your database (default is 60000).
 - **Secure your database [with a key file](https://keepass.info/help/base/keys.html#keyfiles "with a key file")** in addition to the master password. Note that the key file should not be stored in the same location as your database.
+
+### Automatic installation
+You can use the **KeePass_Secure_Auto_Install.ps1** file to install and configure KeePass automatically !
+
+What the script does:
+1. **Download the latest version** of KeePass from its official website
+2. **Checks the integrity** of the file by comparing its hash
+3. **Copy the enforced configuration file**
+4. **Alter permissions** on the KeePass installation folder
+
+#### Parameters
+- **ConfigFile** : Optional - path to the KeePass.config.enforced.xml (Default : .\KeePass.config.enforced.xml).
+- **EnforceACL** Optional - secure KeePass installation directory using ACLs (Default : True).
+
+#### Run
+**Default** : `.\KeePass_Secure_Auto_Install.ps1`  
+**Custom** : `.\KeePass_Secure_Auto_Install.ps1 -ConfigFile "C:\path\to\file.xml" -EnforceACL $False`
+
+[![](https://github.com/onSec-fr/Keepass-Enhanced-Security-Configuration/blob/main/res/auto_install.gif?raw=true)](https://github.com/onSec-fr/Keepass-Enhanced-Security-Configuration/blob/main/res/auto_install.png?raw=true)
 
 ### Configuration file
 From [official documentation ](https://keepass.info/help/kb/config_enf.html#info "official documentation "): 
@@ -136,25 +155,6 @@ The settings are poorly documented, but if you want to play around, there is a w
 > 1. Download the portable ZIP package of KeePass and unpack it. Run KeePass, configure everything as you wish, and exit it.
 > 2. Rename the configuration file to the enforced configuration file name.
 > 3. Open the enforced configuration file with a text editor and delete all settings that you do not want to enforce.
-
-### Automatic installation
-You can use the **KeePass_Secure_Auto_Install.ps1** file to install and configure KeePass automatically !
-
-What the script does:
-1. Download the latest version of KeePass from its official website
-2. Checks the integrity of the file by comparing its hash
-3. Copy the enforced configuration file
-4. Alter permissions on the KeePass installation folder
-
-#### Parameters
-- **ConfigFile** : Optional - path to the KeePass.config.enforced.xml (Default : .\KeePass.config.enforced.xml).
-- **EnforceACL** Optional - secure KeePass installation directory using ACLs (Default : True).
-
-#### Run
-- Default -> `.\KeePass_Secure_Auto_Install.ps1`
-- Custom-> `.\KeePass_Secure_Auto_Install.ps1 -ConfigFile "C:\path\to\file.xml" -EnforceACL $False`
-
-[![](https://github.com/onSec-fr/Keepass-Enhanced-Security-Configuration/blob/main/res/auto_install.png?raw=true)](https://github.com/onSec-fr/Keepass-Enhanced-Security-Configuration/blob/main/res/auto_install.png?raw=true)
 
 ### References
 - Official KeePass Website : https://keepass.info
