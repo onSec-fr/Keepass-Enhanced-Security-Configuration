@@ -38,6 +38,7 @@ In order to further secure your installation, please remember to apply the follo
 
 ### Automatic installation
 You can use the **KeePass_Secure_Auto_Install.ps1** file to install and configure KeePass automatically !
+> If you don't want to, just copy the *KeePass.config.enforced.xml* file to the root of the KeePass installation directory.
 
 What the script does:
 1. **Download the latest version** of KeePass from its official website
