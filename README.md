@@ -174,7 +174,7 @@ The settings are poorly documented, but if you want to play around, there is a w
 - **Definitely not**. There are multiple ways to recover passwords in memory, or by abusing certain features. Note that if the attacker has write access to your configuration file, he can simply modify or delete it.
 
 > How to protect myself from the CVE-2023-24055 vulnerability ?
-- This vulnerability relies on triggers. You can **disable them** using the enhanced configuration file, or **use a version 1.x** that does not have this feature.
+- This disputed "vulnerability" relies on triggers. You can **disable them** using the enhanced configuration file, or **use a version 1.x** that does not have this feature.
 
 > Is there a better password manager for personal use ?
 - Everyone will have their own opinion on this. What I can say is that Keepass is a very good free and open source password manager. The product has been affected by [very few CVEs](https://www.cvedetails.com/vulnerability-list/vendor_id-12214/Keepass.html "[very few CVEs") over the past ten years. None of them were critical.
