@@ -15,6 +15,7 @@
       - [Screenshots](#screenshots)
       - [More settings](#more-settings)
     + [References](#references)
+    + [FAQ](#faq)
 
 ### Introduction
 [KeePass](https://keepass.info "KeePass") is a great tool to store your passwords securely (the best in my opinion).
@@ -33,6 +34,7 @@ In order to further secure your installation, please remember to apply the follo
 - **Secure your KeePass installation directory** so that only your user account can write to it (to protect the integrity of your configuration file).
 - **Increase the number of iterations of the derivation key** used to encrypt your database (default is 60000).
 - **Secure your database [with a key file](https://keepass.info/help/base/keys.html#keyfiles "with a key file")** in addition to the master password. Note that the key file should not be stored in the same location as your database.
+- **Consider using version 1.x**, which has fewer features but is also more secure by design. See **[edition comparison](https://keepass.info/compare.html "edition comparison")**.
 
 ### Automatic installation
 You can use the **KeePass_Secure_Auto_Install.ps1** file to install and configure KeePass automatically !
@@ -162,6 +164,19 @@ The settings are poorly documented, but if you want to play around, there is a w
 - Customization official documentation : https://keepass.info/help/v2_dev/customize.html
 - A case study in Attacking KeePass (by @HarmJ0y) : https://www.harmj0y.net/blog/redteaming/keethief-a-case-study-in-attacking-keepass-part-2/
 - Another case study in Attacking Keepass (by @HarmJ0y) : https://www.slideshare.net/harmj0y/a-case-study-in-attacking-keepass
+
+### FAQ
+> Am I protected from keyloggers using this configuration ?
+- **Yes and no**. Most currently available keyloggers work only on normal desktops; they do not capture keypresses on secure desktops. So, if you enable the MasterKeyOnSecureDesktop setting, the master key is protected against most keyloggers.
+
+> Is my keepass database protected from an attacker who has access to my machine?
+- **Definitely not**. There are multiple ways to recover passwords in memory, or by abusing certain features. Note that if the attacker has write access to your configuration file, he can simply modify or delete it.
+
+> How to protect myself from the CVE-2023-24055 vulnerability ?
+- This vulnerability relies on triggers. You can **disable them** using the enhanced configuration file, or **use a version 1.x** that does not have this feature.
+
+> Is there a better password manager for personal use ?
+- Everyone will have their own opinion on this. What I can say is that Keepass is a very good free and open source password manager. The product has been affected by [very few CVEs](https://www.cvedetails.com/vulnerability-list/vendor_id-12214/Keepass.html "[very few CVEs") over the past ten years. None of them were critical.
 
 
 [@onSec-fr](https://github.com/onSec-fr "@onSec-fr")
