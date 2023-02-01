@@ -15,6 +15,7 @@
       - [Screenshots](#screenshots)
       - [More settings](#more-settings)
     + [References](#references)
+    + [Resources](#resources)
     + [FAQ](#faq)
 
 ### Introduction
@@ -163,8 +164,11 @@ The settings are poorly documented, but if you want to play around, there is a w
 - Official KeePass Website : https://keepass.info
 - Enforced configuration official documentation : https://keepass.info/help/kb/config_enf.html
 - Customization official documentation : https://keepass.info/help/v2_dev/customize.html
+
+### Resources
 - A case study in Attacking KeePass (by @HarmJ0y) : https://www.harmj0y.net/blog/redteaming/keethief-a-case-study-in-attacking-keepass-part-2/
 - Another case study in Attacking Keepass (by @HarmJ0y) : https://www.slideshare.net/harmj0y/a-case-study-in-attacking-keepass
+- Check out KeePwn, a python tool to automate KeePass discovery and secret extraction : https://github.com/Orange-Cyberdefense/KeePwn
 
 ### FAQ
 > Am I protected from keyloggers using this configuration ?
