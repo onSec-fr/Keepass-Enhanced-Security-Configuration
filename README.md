@@ -21,7 +21,7 @@
 ### Introduction
 [KeePass](https://keepass.info "KeePass") is a great tool to store your passwords securely (the best in my opinion).
 
-On the other hand its popularity leads to a risk since there are [many ways to attack Keepass](https://www.harmj0y.net/blog/redteaming/keethief-a-case-study-in-attacking-keepass-part-2/ "many ways to attack Keepass") nowadays.
+On the other hand its popularity leads to a risk since there are [many ways to attack Keepass](https://blog.harmj0y.net/redteaming/keethief-a-case-study-in-attacking-keepass-part-2/ "many ways to attack Keepass") nowadays.
 Furthermore the large number of features increases the potential attack surface.
 
 So the goal is to limit some features you don't need and to activate all security mechanisms that are not activated by default.
@@ -166,7 +166,7 @@ The settings are poorly documented, but if you want to play around, there is a w
 - Customization official documentation : https://keepass.info/help/v2_dev/customize.html
 
 ### Resources
-- A case study in Attacking KeePass (by @HarmJ0y) : https://www.harmj0y.net/blog/redteaming/keethief-a-case-study-in-attacking-keepass-part-2/
+- A case study in Attacking KeePass (by @HarmJ0y) : https://blog.harmj0y.net/redteaming/keethief-a-case-study-in-attacking-keepass-part-2/
 - Another case study in Attacking Keepass (by @HarmJ0y) : https://www.slideshare.net/harmj0y/a-case-study-in-attacking-keepass
 - Check out KeePwn, a python tool to automate KeePass discovery and secret extraction : https://github.com/Orange-Cyberdefense/KeePwn
 
