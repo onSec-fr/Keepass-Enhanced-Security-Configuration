@@ -7,6 +7,7 @@
 - [KeePass Enhanced Security Configuration](#keepass-enhanced-security-configuration)
     + [Introduction](#introduction)
     + [General considerations](#general-considerations)
+    + [Existing installation](#existing-installation)
 	+ [Automatic installation](#automatic-installation)
       - [Parameters](#parameters)
       - [Run](#run)
@@ -17,14 +18,15 @@
     + [References](#references)
     + [Resources](#resources)
     + [FAQ](#faq)
+    + [TODO](#todo)
 
 ### Introduction
 [KeePass](https://keepass.info "KeePass") is a great tool to store your passwords securely for personnal use.
 
-On the other hand its popularity leads to a risk since there are [many ways to attack Keepass](https://blog.harmj0y.net/redteaming/keethief-a-case-study-in-attacking-keepass-part-2/ "many ways to attack Keepass") nowadays.
-Furthermore the large number of features increases the potential attack surface.
+On the other hand its popularity leads to a risk since there are [many ways to attack Keepass](https://blog.harmj0y.net/redteaming/keethief-a-case-study-in-attacking-keepass-part-2/ "many ways to attack Keepass").
+Furthermore the large number of features increases the potential attack surface. 
 
-So the goal is to limit some features you don't need and to activate all security mechanisms that are not activated by default.
+**So the goal is to limit some features you don't need and to activate all security mechanisms that are not activated by default.**
 
 To do this we will use the [enforced configuration file](https://keepass.info/help/kb/config_enf.html "enforced configuration file"), which is an official KeePass feature.
 
@@ -32,28 +34,34 @@ To do this we will use the [enforced configuration file](https://keepass.info/he
 In order to further secure your installation, please remember to apply the following recommendations: 
 
 - Download KeePass **[from its official website](https://keepass.info "from its official website")** only and **[check the integrity of the downloaded file](https://keepass.info/integrity.html "check the integrity of the downloaded file")**.
-- **Secure your KeePass installation directory** so that only your user account can write to it (to protect the integrity of your configuration file).
-- **Increase the number of iterations of the derivation key** used to encrypt your database (default is 60000).
+- If you are using the portable version, **secure your KeePass installation directory** so that only your user account can write to it (to protect the integrity of your configuration file).
+- **Increase the number of iterations of the derivation key** used to encrypt your database (default is 60000). *You can use the "1 Second Delay" button to set a value automatically.*
+- **Lock your database** when not in use.
 - **Secure your database [with a key file](https://keepass.info/help/base/keys.html#keyfiles "with a key file")** in addition to the master password. Note that the key file should not be stored in the same location as your database.
 - **Consider using version 1.x**, which has fewer features but is also more secure by design. See **[edition comparison](https://keepass.info/compare.html "edition comparison")**.
 
+Check out KeePwn, a python tool to automate KeePass discovery and secret extraction : https://github.com/Orange-Cyberdefense/KeePwn.
+
+### Existing installation
+You can just copy the *KeePass.config.enforced.xml* file to the root of the KeePass installation directory. Settings will be applied at the next Keepass launch.
+
 ### Automatic installation
-You can use the **KeePass_Secure_Auto_Install.ps1** file to install and configure KeePass automatically !
+You can use the **KeePass_Secure_Auto_Install.ps1** file to fully install and configure KeePass automatically !
 > If you don't want to, just copy the *KeePass.config.enforced.xml* file to the root of the KeePass installation directory.
 
 What the script does:
 1. **Download the latest version** of KeePass from its official website
 2. **Checks the integrity** of the file by comparing its hash
 3. **Copy the enforced configuration file**
-4. **Alter permissions** on the KeePass installation folder
+4. **Alter permissions** on the KeePass installation folder (remove all ACLs except the current user)
 
 #### Parameters
-- **ConfigFile** : Optional - path to the KeePass.config.enforced.xml (Default : .\KeePass.config.enforced.xml).
-- **EnforceACL** Optional - secure KeePass installation directory using ACLs (Default : True).
+- **ConfigFile** : Optional - path to the KeePass.config.enforced.xml *(Default : .\KeePass.config.enforced.xml)*
+- **EnforceACL** : Optional - secure KeePass installation directory using ACLs *(Default : False)*
 
 #### Run
 **Default** : `.\KeePass_Secure_Auto_Install.ps1`  
-**Custom** : `.\KeePass_Secure_Auto_Install.ps1 -ConfigFile "C:\path\to\file.xml" -EnforceACL $False`
+**Custom** : `.\KeePass_Secure_Auto_Install.ps1 -ConfigFile "C:\path\to\file.xml" -EnforceACL $True`
 
 [![](https://github.com/onSec-fr/Keepass-Enhanced-Security-Configuration/blob/main/res/auto_install.gif?raw=true)](https://github.com/onSec-fr/Keepass-Enhanced-Security-Configuration/blob/main/res/auto_install.png?raw=true)
 
@@ -159,6 +167,7 @@ The settings are poorly documented, but if you want to play around, there is a w
 > 1. Download the portable ZIP package of KeePass and unpack it. Run KeePass, configure everything as you wish, and exit it.
 > 2. Rename the configuration file to the enforced configuration file name.
 > 3. Open the enforced configuration file with a text editor and delete all settings that you do not want to enforce.
+> **Note that not all parameters are accessible from the UI**
 
 ### References
 - Official KeePass Website : https://keepass.info
@@ -166,19 +175,23 @@ The settings are poorly documented, but if you want to play around, there is a w
 - Customization official documentation : https://keepass.info/help/v2_dev/customize.html
 
 ### Resources
-- A case study in Attacking KeePass (by @HarmJ0y) : https://blog.harmj0y.net/redteaming/keethief-a-case-study-in-attacking-keepass-part-2/
-- Another case study in Attacking Keepass (by @HarmJ0y) : https://www.slideshare.net/harmj0y/a-case-study-in-attacking-keepass
-- Check out KeePwn, a python tool to automate KeePass discovery and secret extraction : https://github.com/Orange-Cyberdefense/KeePwn
+- A case study in Attacking KeePass (@HarmJ0y) : https://blog.harmj0y.net/redteaming/keethief-a-case-study-in-attacking-keepass-part-2/
+- Another case study in Attacking Keepass (@HarmJ0y) : https://www.slideshare.net/harmj0y/a-case-study-in-attacking-keepass
+- KeePwn : https://github.com/Orange-Cyberdefense/KeePwn
+- Webinar "Attaquer et durcir KeePass" (Hamza Kondah) : https://www.linkedin.com/events/7098643529362468864
 
 ### FAQ
 > Am I protected from keyloggers using this configuration ?
 - **Yes and no**. Most currently available keyloggers work only on normal desktops; they do not capture keypresses on secure desktops. So, if you enable the MasterKeyOnSecureDesktop setting, the master key is protected against most keyloggers.
 
 > Is my keepass database protected from an attacker who has access to my machine?
-- **Definitely not**. There are multiple ways to recover passwords in memory, or by abusing certain features. Note that if the attacker has write access to your configuration file, he can simply modify or delete it.
+- **Definitely not**. There are multiple ways to recover passwords in memory, or by abusing certain features. Note that if the attacker has write access to your configuration file, he can simply modify or delete it. 
 
 > Is there a better password manager for personal use ?
 - Everyone will have their own opinion on this. What I can say is that Keepass is a very good free and open source password manager. The product has been affected by [very few CVEs](https://www.cvedetails.com/vulnerability-list/vendor_id-12214/Keepass.html "[very few CVEs") over the past ten years. None of them were critical.
 
+### TODO
+- Add a reference table of parameters with their role and recommended values.
+- Add mapping between known attacks and associated mitigations.
 
 [@onSec-fr](https://github.com/onSec-fr "@onSec-fr")

@@ -1,13 +1,13 @@
 ﻿### KeePass_Secure_Auto_Install ###
 ### Author : onSec-fr
-### Version : 1.0 (01/05/2021)
+### Source : https://github.com/onSec-fr/Keepass-Enhanced-Security-Configuration
+### Version : 1.1 (25/08/2023)
 
 param(
      [Parameter()]
      [string]$ConfigFile = $null, # Optional - path to the KeePass.config.enforced.xml (Default : .\KeePass.config.enforced.xml)
- 
      [Parameter()]
-     [bool]$EnforceACL = $true # Optional - secure KeePass installation directory using ACLs (Default : True)
+     [bool]$EnforceACL = $false # Optional - secure KeePass installation directory using ACLs (Default : False)
  )
 
 # Check last version available on keepass.info
