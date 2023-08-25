@@ -40,7 +40,7 @@ In order to further secure your installation, please remember to apply the follo
 - **Secure your database [with a key file](https://keepass.info/help/base/keys.html#keyfiles "with a key file")** in addition to the master password. Note that the key file should not be stored in the same location as your database.
 - **Consider using version 1.x**, which has fewer features but is also more secure by design. See **[edition comparison](https://keepass.info/compare.html "edition comparison")**.
 
-Check out KeePwn, a python tool to automate KeePass discovery and secret extraction : https://github.com/Orange-Cyberdefense/KeePwn.
+> Check out KeePwn, a python tool to automate KeePass discovery and secret extraction : https://github.com/Orange-Cyberdefense/KeePwn.
 
 ### Existing installation
 You can just copy the *KeePass.config.enforced.xml* file to the root of the KeePass installation directory. Settings will be applied at the next Keepass launch.
@@ -166,7 +166,7 @@ The settings are poorly documented, but if you want to play around, there is a w
 > In order to create an enforced configuration file, we recommend the following procedure:
 > 1. Download the portable ZIP package of KeePass and unpack it. Run KeePass, configure everything as you wish, and exit it.
 > 2. Rename the configuration file to the enforced configuration file name.
-> 3. Open the enforced configuration file with a text editor and delete all settings that you do not want to enforce.
+> 3. Open the enforced configuration file with a text editor and delete all settings that you do not want to enforce.  
 > **Note that not all parameters are accessible from the UI**
 
 ### References
