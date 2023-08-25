@@ -167,7 +167,7 @@ The settings are poorly documented, but if you want to play around, there is a w
 > 1. Download the portable ZIP package of KeePass and unpack it. Run KeePass, configure everything as you wish, and exit it.
 > 2. Rename the configuration file to the enforced configuration file name.
 > 3. Open the enforced configuration file with a text editor and delete all settings that you do not want to enforce.
-
+>
 > **Note that not all parameters are accessible from the UI**
 
 ### References
