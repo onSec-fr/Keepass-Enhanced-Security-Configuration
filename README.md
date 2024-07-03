@@ -42,8 +42,16 @@ In order to further secure your installation, please remember to apply the follo
 
 > Check out KeePwn, a python tool to automate KeePass discovery and secret extraction : https://github.com/Orange-Cyberdefense/KeePwn.
 
+### Environment-specific considerations
+The purpose of this repo is to provide an example of best practices that can be implemented. Some settings may be incompatible or unnecessary in your environment.
+- **Review the supplied configuration file** and check that it does not disable any of the features you use. 
+- In a corporate environment, **adjust the settings according to your security policy.**
+- Please note that **the provided file disables automatic updates** in order to protect against a compromised version. This means **you'll be responsible for updating your package** on a regular basis. If you prefer, automatic updates can be re-enabled by modifying the configuration file.
+- Note that if the user or attacker has write access to the enforced configuration file, they will be able to alter the settings. This is why, in an corporate environment, **I recommend deploying this file via GPO**. For personal use, you should not use keepass with a local administrator account.
+
 ### Existing installation
-You can just copy the *KeePass.config.enforced.xml* file to the root of the KeePass installation directory. Settings will be applied at the next Keepass launch.
+You can just copy the *KeePass.config.enforced.xml* file to the root of the KeePass installation directory (this also works with portable versions).  
+**Settings will be applied at the next Keepass launch.**
 
 ### Automatic installation
 You can use the **KeePass_Secure_Auto_Install.ps1** file to fully install and configure KeePass automatically !
