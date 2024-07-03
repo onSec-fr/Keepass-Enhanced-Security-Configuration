@@ -1,13 +1,13 @@
 ﻿### KeePass_Secure_Auto_Install ###
 ### Author : onSec-fr
 ### Source : https://github.com/onSec-fr/Keepass-Enhanced-Security-Configuration
-### Version : 1.1 (25/08/2023)
+### Version : 1.2 (03/07/2024)
 
 param(
      [Parameter()]
-     [string]$ConfigFile = $null, # Optional - path to the KeePass.config.enforced.xml (Default : .\KeePass.config.enforced.xml)
+     [string]$ConfigFile = $null, # Optional - Path to the KeePass.config.enforced.xml (Default : .\KeePass.config.enforced.xml)
      [Parameter()]
-     [bool]$EnforceACL = $false # Optional - secure KeePass installation directory using ACLs (Default : False)
+     [bool]$EnforceACL = $false # Optional - Alter KeePass installation directory ACLs (Default : False)
  )
 
 # Check last version available on keepass.info
@@ -19,7 +19,7 @@ $lastVersion = $link.outerText.Split(" ")[2].Split("-")[1]
 Write-Host "Last version found: $lastVersion" -ForegroundColor green
 
 # Download package from sourceforge. File integrity will be checked later.
-$downloadlink = $link.href
+$downloadlink = "https://netix.dl.sourceforge.net/project/keepass/KeePass%202.x/$lastVersion/KeePass-$lastVersion-Setup.exe?viasf=1"
 Write-Host "Downloading package from $downloadlink ..." -ForegroundColor white
 Invoke-WebRequest -Uri $downloadlink -OutFile "keepass-$lastVersion.exe" -UserAgent [Microsoft.PowerShell.Commands.PSUserAgent]::FireFox
 Write-Host "Saved to: keepass-$lastVersion.exe" -ForegroundColor green
@@ -80,7 +80,7 @@ else
 
 if ($EnforceACL)
 {
-    Write-Host "EnforceACL not specified. Default : Protecting KeePass installation Folder with ACLs..." -ForegroundColor white
+    Write-Host "EnforceACL is set to True. Altering KeePass installation Folder ACLs..." -ForegroundColor white
     #Set ACLs to protect keepass installation folder. Remove all rights and give full control to current user.
     $FolderPath = $KeepassInstallationLocation
     $acl = Get-Acl -Path $FolderPath
