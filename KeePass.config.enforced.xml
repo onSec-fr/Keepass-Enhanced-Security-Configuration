@@ -45,6 +45,7 @@
 		<MasterPassword>
 			<MinimumLength>16</MinimumLength>
 			<MinimumQuality>80</MinimumQuality>
+			<RememberWhileOpen>false</RememberWhileOpen>
 		</MasterPassword>
 		<!-- Enable Secure Desktop (ref https://keepass.info/help/kb/sec_desk.html)  -->
 		<MasterKeyOnSecureDesktop>true</MasterKeyOnSecureDesktop>
