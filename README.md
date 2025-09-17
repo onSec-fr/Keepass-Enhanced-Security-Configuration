@@ -13,6 +13,7 @@
       - [Run](#run)
     + [Configuration file](#configuration-file)
       - [Sample file](#sample-file)
+      - [Settings description](#settings-description)
       - [Screenshots](#screenshots)
       - [More settings](#more-settings)
     + [References](#references)
@@ -48,6 +49,7 @@ The purpose of this repo is to provide an example of best practices that can be 
 - In a corporate environment, **adjust the settings according to your security policy.**
 - Please note that **the provided file disables automatic updates** in order to protect against a compromised version. This means **you'll be responsible for updating your package** on a regular basis. If you prefer, automatic updates can be re-enabled by modifying the configuration file.
 - Note that if the user or attacker has write access to the enforced configuration file, they will be able to alter the settings. This is why, in an corporate environment, **I recommend deploying this file via GPO**. For personal use, you should not use keepass with a local administrator account.
+- Administrators can **disallow running other copies of KeePass** and other applications (that support the KeePass database file format), if desired, e.g. using Application Control, AppLocker or Software Restriction Policies.
 
 ### Existing installation
 You can just copy the *KeePass.config.enforced.xml* file to the root of the KeePass installation directory (this also works with portable versions).  
@@ -157,6 +159,48 @@ Here is an example file, which embeds most of the important security mechanisms,
 	</Integration>
 </Configuration>
 ```
+
+#### Settings description 
+This table lists all parameters used in the sample :
+| XPath | Parameter | Example Value | Description |
+|-------|-----------|---------------|---------------------|
+| `/Configuration/Application/TriggerSystem/Enabled` | TriggerSystem Enabled | `false` | Disables or enables the trigger system. If `false`, no automated triggers are executed. |
+| `/Configuration/Application/TriggerSystem/Triggers` | Triggers (with `MergeContentMode="Replace"`) | *(empty list)* | Replaces all triggers with an empty list, effectively removing any existing triggers. |
+| `/Configuration/Application/Start/CheckForUpdate` | CheckForUpdate | `false` | Disables automatic update checks. Updates must be performed manually. |
+| `/Configuration/Application/Start/CheckForUpdateConfigured` | CheckForUpdateConfigured | `true` | Marks the update check setting as configured and enforces its value. |
+| `/Configuration/UI/UIFlags` | UIFlags | `32` | Bitmask controlling UI elements (hiding “Check for Updates” menu entry). |
+| `/Configuration/Security/Policy/ChangeMasterKeyNoKey` | ChangeMasterKeyNoKey | `false` | Prevents changing the master key without entering the current key. |
+| `/Configuration/Security/Policy/PrintNoKey` | PrintNoKey | `false` | Disallows printing when the database is not unlocked. |
+| `/Configuration/Security/Policy/EditTriggers` | EditTriggers | `false` | Prevents editing or creating triggers. |
+| `/Configuration/Security/Policy/Plugins` | Plugins | `false` | Disables the use of plugins. |
+| `/Configuration/Security/Policy/Export` | Export | `false` | Disables exporting entries. |
+| `/Configuration/Security/Policy/ExportNoKey` | ExportNoKey | `false` | Disallows export operations when the database is not unlocked. |
+| `/Configuration/Security/Policy/Import` | Import | `false` | Disables importing of entries. |
+| `/Configuration/Security/Policy/Print` | Print | `false` | Disables printing of entries. |
+| `/Configuration/Security/Policy/CopyWholeEntries` | CopyWholeEntries | `false` | Prevents copying complete entries (username+password). |
+| `/Configuration/Security/Policy/DragDrop` | DragDrop | `false` | Disables drag-and-drop of entries. |
+| `/Configuration/Security/Policy/UnhidePasswords` | UnhidePasswords | `false` | Disallows unmasking of password fields. |
+| `/Configuration/Security/WorkspaceLocking/LockOnSessionSwitch` | LockOnSessionSwitch | `true` | Locks the workspace when switching user sessions. |
+| `/Configuration/Security/WorkspaceLocking/LockOnSuspend` | LockOnSuspend | `true` | Locks KeePass when the system goes into suspend/sleep mode. |
+| `/Configuration/Security/WorkspaceLocking/LockAfterTime` | LockAfterTime | `600` | Locks KeePass after 600 seconds (10 min) of inactivity. |
+| `/Configuration/Security/WorkspaceLocking/LockAfterGlobalTime` | LockAfterGlobalTime | `3600` | Locks KeePass after 3600 seconds (1 hour), regardless of activity. |
+| `/Configuration/Security/WorkspaceLocking/LockOnRemoteControlChange` | LockOnRemoteControlChange | `true` | Locks KeePass when remote control status changes (e.g., Remote Desktop). |
+| `/Configuration/Security/MasterPassword/MinimumLength` | MinimumLength | `16` | Requires master password to be at least 16 characters long. |
+| `/Configuration/Security/MasterPassword/MinimumQuality` | MinimumQuality | `80` | Enforces minimum quality/entropy for the master password. |
+| `/Configuration/Security/MasterPassword/RememberWhileOpen` | RememberWhileOpen | `false` | Prevents KeePass from storing the master password in memory while database is open. |
+| `/Configuration/Security/MasterKeyOnSecureDesktop` | MasterKeyOnSecureDesktop | `true` | Enables secure desktop for master key entry to protect against keyloggers. |
+| `/Configuration/Security/ClipboardClearAfterSeconds` | ClipboardClearAfterSeconds | `10` | Clears clipboard contents after 10 seconds. |
+| `/Configuration/Security/ProtectProcessWithDacl` | ProtectProcessWithDacl | `true` | Restricts other processes from accessing KeePass memory via DACL protection. |
+| `/Configuration/Security/PreventScreenCapture` | PreventScreenCapture | `true` | Prevents screen capturing of KeePass windows. |
+| `/Configuration/PasswordGenerator/AutoGeneratedPasswordsProfile/GeneratorType` | GeneratorType | `CharSet` | Uses character set–based password generation. |
+| `/Configuration/PasswordGenerator/AutoGeneratedPasswordsProfile/Length` | Length | `12` | Default length for generated passwords. |
+| `/Configuration/PasswordGenerator/AutoGeneratedPasswordsProfile/CharSetRanges` | CharSetRanges | `ULDS______` | Character sets used: U=uppercase, L=lowercase, D=digits, S=specials. |
+| `/Configuration/PasswordGenerator/AutoGeneratedPasswordsProfile/ExcludeLookAlike` | ExcludeLookAlike | `true` | Excludes look-alike characters (`O/0`, `l/1`) from generated passwords. |
+| `/Configuration/PasswordGenerator/AutoGeneratedPasswordsProfile/NoRepeatingCharacters` | NoRepeatingCharacters | `true` | Ensures no repeating characters in generated passwords. |
+| `/Configuration/Integration/ProxyType` | ProxyType | `System` | Uses system proxy configuration for connections. |
+| `/Configuration/Integration/ProxyAuthType` | ProxyAuthType | `Auto` | Uses automatic proxy authentication method. |
+
+
 #### Screenshots
 - As you can see the settings are now enforced :
 
@@ -171,7 +215,7 @@ Here is an example file, which embeds most of the important security mechanisms,
 [![](https://github.com/onSec-fr/Keepass-Enhanced-Security-Configuration/blob/main/res/disallowed.png?raw=true)](https://github.com/onSec-fr/Keepass-Enhanced-Security-Configuration/blob/main/res/disallowed.png?raw=true)
 
 #### More settings
-The settings are poorly documented, but if you want to play around, there is a way :
+Some settings are poorly documented, but if you want to play around, there is a way :
 > In order to create an enforced configuration file, we recommend the following procedure:
 > 1. Download the portable ZIP package of KeePass and unpack it. Run KeePass, configure everything as you wish, and exit it.
 > 2. Rename the configuration file to the enforced configuration file name.
@@ -201,7 +245,6 @@ The settings are poorly documented, but if you want to play around, there is a w
 - Everyone will have their own opinion on this. What I can say is that Keepass is a very good free and open source password manager. The product has been affected by [very few CVEs](https://www.cvedetails.com/vulnerability-list/vendor_id-12214/Keepass.html "[very few CVEs") over the past ten years. None of them were critical.
 
 ### TODO
-- Add a reference table of parameters with their role and recommended values.
 - Add mapping between known attacks and associated mitigations.
 
 [@onSec-fr](https://github.com/onSec-fr "@onSec-fr")
