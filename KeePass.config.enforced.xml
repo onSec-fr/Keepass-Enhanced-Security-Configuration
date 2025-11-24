@@ -37,8 +37,8 @@
 		<WorkspaceLocking>
 			<LockOnSessionSwitch>true</LockOnSessionSwitch>
 			<LockOnSuspend>true</LockOnSuspend>
-			<LockAfterTime>600</LockAfterTime>
-			<LockAfterGlobalTime>3600</LockAfterGlobalTime>
+			<LockAfterTime>3600</LockAfterTime>
+			<LockAfterGlobalTime>600</LockAfterGlobalTime>
 			<LockOnRemoteControlChange>true</LockOnRemoteControlChange>
 		</WorkspaceLocking>
 		<!-- Master password requirements -->

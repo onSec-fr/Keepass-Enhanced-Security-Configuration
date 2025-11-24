@@ -123,8 +123,8 @@ Here is an example file, which embeds most of the important security mechanisms,
 		<WorkspaceLocking>
 			<LockOnSessionSwitch>true</LockOnSessionSwitch>
 			<LockOnSuspend>true</LockOnSuspend>
-			<LockAfterTime>600</LockAfterTime>
-			<LockAfterGlobalTime>3600</LockAfterGlobalTime>
+			<LockAfterTime>3600</LockAfterTime>
+			<LockAfterGlobalTime>600</LockAfterGlobalTime>
 			<LockOnRemoteControlChange>true</LockOnRemoteControlChange>
 		</WorkspaceLocking>
 		<!-- Master password requirements -->
@@ -182,8 +182,8 @@ This table lists all parameters used in the sample :
 | `/Configuration/Security/Policy/UnhidePasswords` | UnhidePasswords | `false` | Disallows unmasking of password fields. |
 | `/Configuration/Security/WorkspaceLocking/LockOnSessionSwitch` | LockOnSessionSwitch | `true` | Locks the workspace when switching user sessions. |
 | `/Configuration/Security/WorkspaceLocking/LockOnSuspend` | LockOnSuspend | `true` | Locks KeePass when the system goes into suspend/sleep mode. |
-| `/Configuration/Security/WorkspaceLocking/LockAfterTime` | LockAfterTime | `600` | Locks KeePass after 600 seconds (10 min) of inactivity. |
-| `/Configuration/Security/WorkspaceLocking/LockAfterGlobalTime` | LockAfterGlobalTime | `3600` | Locks KeePass after 3600 seconds (1 hour), regardless of activity. |
+| `/Configuration/Security/WorkspaceLocking/LockAfterTime` | LockAfterTime | `600` | Locks KeePass after 600 seconds (10 min) of KeePass inactivity. |
+| `/Configuration/Security/WorkspaceLocking/LockAfterGlobalTime` | LockAfterGlobalTime | `3600` | Locks KeePass after 3600 seconds (1 hour) of global user inactivity. |
 | `/Configuration/Security/WorkspaceLocking/LockOnRemoteControlChange` | LockOnRemoteControlChange | `true` | Locks KeePass when remote control status changes (e.g., Remote Desktop). |
 | `/Configuration/Security/MasterPassword/MinimumLength` | MinimumLength | `16` | Requires master password to be at least 16 characters long. |
 | `/Configuration/Security/MasterPassword/MinimumQuality` | MinimumQuality | `80` | Enforces minimum quality/entropy for the master password. |
