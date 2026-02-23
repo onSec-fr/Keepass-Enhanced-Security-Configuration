@@ -15,8 +15,12 @@
 	</Application>
 	<!-- Specifying UI Element States : https://keepass.info/help/v2_dev/customize.html#uiflags -->
 	<UI>
-		<!-- Disable 'Help' → 'Check for Updates' menu item. -->
-		<UIFlags>32</UIFlags>
+		<!-- 2   = Disable 'Tools' → 'Plugins' menu item       -->
+		<!-- 4   = Disable 'Tools' → 'Triggers' menu item      -->
+		<!-- 32  = Disable 'Help'  → 'Check for Updates' item  -->
+		<!-- 64  = Disable 'Tools' → 'XML Replace' menu item   -->
+		<!-- Total : 2 + 4 + 32 + 64 = 102                     -->
+		<UIFlags>102</UIFlags>
 	</UI>
 	<Security>
 		<!-- Edit Policy -->
@@ -32,6 +36,7 @@
 			<CopyWholeEntries>false</CopyWholeEntries>
 			<DragDrop>false</DragDrop>
 			<UnhidePasswords>false</UnhidePasswords>
+			<AutoTypeWithoutContext>false</AutoTypeWithoutContext>
 		</Policy>
 		<!-- Enforce automatic locking -->
 		<WorkspaceLocking>

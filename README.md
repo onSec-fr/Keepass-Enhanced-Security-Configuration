@@ -101,8 +101,12 @@ Here is an example file, which embeds most of the important security mechanisms,
 	</Application>
 	<!-- Specifying UI Element States : https://keepass.info/help/v2_dev/customize.html#uiflags -->
 	<UI>
-		<!-- Disable 'Help' → 'Check for Updates' menu item. -->
-		<UIFlags>32</UIFlags>
+		<!-- 2   = Disable 'Tools' → 'Plugins' menu item       -->
+		<!-- 4   = Disable 'Tools' → 'Triggers' menu item      -->
+		<!-- 32  = Disable 'Help'  → 'Check for Updates' item  -->
+		<!-- 64  = Disable 'Tools' → 'XML Replace' menu item   -->
+		<!-- Total : 2 + 4 + 32 + 64 = 102                     -->
+		<UIFlags>102</UIFlags>
 	</UI>
 	<Security>
 		<!-- Edit Policy -->
@@ -118,6 +122,7 @@ Here is an example file, which embeds most of the important security mechanisms,
 			<CopyWholeEntries>false</CopyWholeEntries>
 			<DragDrop>false</DragDrop>
 			<UnhidePasswords>false</UnhidePasswords>
+			<AutoTypeWithoutContext>false</AutoTypeWithoutContext>
 		</Policy>
 		<!-- Enforce automatic locking -->
 		<WorkspaceLocking>
@@ -168,7 +173,7 @@ This table lists all parameters used in the sample :
 | `/Configuration/Application/TriggerSystem/Triggers` | Triggers (with `MergeContentMode="Replace"`) | *(empty list)* | Replaces all triggers with an empty list, effectively removing any existing triggers. |
 | `/Configuration/Application/Start/CheckForUpdate` | CheckForUpdate | `false` | Disables automatic update checks. Updates must be performed manually. |
 | `/Configuration/Application/Start/CheckForUpdateConfigured` | CheckForUpdateConfigured | `true` | Marks the update check setting as configured and enforces its value. |
-| `/Configuration/UI/UIFlags` | UIFlags | `32` | Bitmask controlling UI elements (hiding “Check for Updates” menu entry). |
+| `/Configuration/UI/UIFlags` | UIFlags | `102` | Bitmask controlling UI elements. `2`=hide Plugins, `4`=hide Triggers, `32`=hide “Check for Updates”, `64`=hide “XML Replace”. Total: 2+4+32+64=102. |
 | `/Configuration/Security/Policy/ChangeMasterKeyNoKey` | ChangeMasterKeyNoKey | `false` | Prevents changing the master key without entering the current key. |
 | `/Configuration/Security/Policy/PrintNoKey` | PrintNoKey | `false` | Disallows printing when the database is not unlocked. |
 | `/Configuration/Security/Policy/EditTriggers` | EditTriggers | `false` | Prevents editing or creating triggers. |
@@ -180,10 +185,11 @@ This table lists all parameters used in the sample :
 | `/Configuration/Security/Policy/CopyWholeEntries` | CopyWholeEntries | `false` | Prevents copying complete entries (username+password). |
 | `/Configuration/Security/Policy/DragDrop` | DragDrop | `false` | Disables drag-and-drop of entries. |
 | `/Configuration/Security/Policy/UnhidePasswords` | UnhidePasswords | `false` | Disallows unmasking of password fields. |
+| `/Configuration/Security/Policy/AutoTypeWithoutContext` | AutoTypeWithoutContext | `false` | Disables global auto-type hotkey when no target window is identified. Prevents credential injection into unintended windows (known attack vector). |
 | `/Configuration/Security/WorkspaceLocking/LockOnSessionSwitch` | LockOnSessionSwitch | `true` | Locks the workspace when switching user sessions. |
 | `/Configuration/Security/WorkspaceLocking/LockOnSuspend` | LockOnSuspend | `true` | Locks KeePass when the system goes into suspend/sleep mode. |
-| `/Configuration/Security/WorkspaceLocking/LockAfterTime` | LockAfterTime | `600` | Locks KeePass after 600 seconds (10 min) of KeePass inactivity. |
-| `/Configuration/Security/WorkspaceLocking/LockAfterGlobalTime` | LockAfterGlobalTime | `3600` | Locks KeePass after 3600 seconds (1 hour) of global user inactivity. |
+| `/Configuration/Security/WorkspaceLocking/LockAfterTime` | LockAfterTime | `3600` | Locks KeePass after 3600 seconds (1 hour) of KeePass inactivity. |
+| `/Configuration/Security/WorkspaceLocking/LockAfterGlobalTime` | LockAfterGlobalTime | `600` | Locks KeePass after 600 seconds (10 min) of global system inactivity. |
 | `/Configuration/Security/WorkspaceLocking/LockOnRemoteControlChange` | LockOnRemoteControlChange | `true` | Locks KeePass when remote control status changes (e.g., Remote Desktop). |
 | `/Configuration/Security/MasterPassword/MinimumLength` | MinimumLength | `16` | Requires master password to be at least 16 characters long. |
 | `/Configuration/Security/MasterPassword/MinimumQuality` | MinimumQuality | `80` | Enforces minimum quality/entropy for the master password. |
