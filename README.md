@@ -1,88 +1,108 @@
-# KeePass Enhanced Security Configuration 
+# KeePass Enhanced Security Configuration
 
-**Make your keepass more secure** using the not very-well known KeePass enforced configuration file. 
+**Make your keepass more secure** using the [enforced configuration file](https://keepass.info/help/kb/config_enf.html), an official but often overlooked KeePass feature.
 
 ![](https://github.com/onSec-fr/Keepass-Enhanced-Security-Configuration/blob/main/res/icon.ico?raw=true)
 
-- [KeePass Enhanced Security Configuration](#keepass-enhanced-security-configuration)
-    + [Introduction](#introduction)
-    + [General considerations](#general-considerations)
-    + [Existing installation](#existing-installation)
-	+ [Automatic installation](#automatic-installation)
-      - [Parameters](#parameters)
-      - [Run](#run)
-    + [Configuration file](#configuration-file)
-      - [Sample file](#sample-file)
-      - [Settings description](#settings-description)
-      - [Screenshots](#screenshots)
-      - [More settings](#more-settings)
-    + [References](#references)
-    + [Resources](#resources)
-    + [FAQ](#faq)
-    + [TODO](#todo)
+## TL;DR — Harden KeePass in 30 seconds 🚀
 
-### Introduction
-[KeePass](https://keepass.info "KeePass") is a great tool to store your passwords securely for personnal use.
+Just copy one file. No configuration required.
 
-On the other hand its popularity leads to a risk since there are [many ways to attack Keepass](https://blog.harmj0y.net/redteaming/keethief-a-case-study-in-attacking-keepass-part-2/ "many ways to attack Keepass").
-Furthermore the large number of features increases the potential attack surface. 
+1. Download [KeePass.config.enforced.xml](KeePass.config.enforced.xml) from this repository
+2. Copy it to your KeePass installation directory (e.g., `C:\Program Files\KeePass Password Safe 2\`)
+3. Restart KeePass
 
-**So the goal is to limit some features you don't need and to activate all security mechanisms that are not activated by default.**
+That's it. Over 30 security settings are now enforced — attack surface reduced, dangerous features disabled.
 
-To do this we will use the [enforced configuration file](https://keepass.info/help/kb/config_enf.html "enforced configuration file"), which is an official KeePass feature.
+---
 
-### General considerations
-In order to further secure your installation, please remember to apply the following recommendations: 
+- [Introduction](#introduction)
+- [General Considerations](#general-considerations)
+- [Existing Installation](#existing-installation)
+- [Automatic Installation](#automatic-installation)
+  - [Parameters](#parameters)
+  - [Usage](#usage)
+- [Configuration File](#configuration-file)
+  - [Sample File](#sample-file)
+  - [Settings Description](#settings-description)
+  - [Screenshots](#screenshots)
+  - [Additional Settings](#additional-settings)
+- [References](#references)
+- [Resources](#resources)
+- [FAQ](#faq)
+- [TODO](#todo)
 
-- Download KeePass **[from its official website](https://keepass.info "from its official website")** only and **[check the integrity of the downloaded file](https://keepass.info/integrity.html "check the integrity of the downloaded file")**.
-- If you are using the portable version, **secure your KeePass installation directory** so that only your user account can write to it (to protect the integrity of your configuration file).
-- **Increase the number of iterations of the derivation key** used to encrypt your database (default is 60000). *You can use the "1 Second Delay" button to set a value automatically.*
-- **Lock your database** when not in use.
-- **Secure your database [with a key file](https://keepass.info/help/base/keys.html#keyfiles "with a key file")** in addition to the master password. Note that the key file should not be stored in the same location as your database.
-- **Consider using version 1.x**, which has fewer features but is also more secure by design. See **[edition comparison](https://keepass.info/compare.html "edition comparison")**.
+## Introduction
 
-> Check out KeePwn, a python tool to automate KeePass discovery and secret extraction : https://github.com/Orange-Cyberdefense/KeePwn.
+[KeePass](https://keepass.info) is a widely used open-source password manager. However, its broad feature set increases the potential attack surface, and [several attack techniques](https://blog.harmj0y.net/redteaming/keethief-a-case-study-in-attacking-keepass-part-2/) targeting KeePass are publicly documented.
 
-### Environment-specific considerations
-The purpose of this repo is to provide an example of best practices that can be implemented. Some settings may be incompatible or unnecessary in your environment.
-- **Review the supplied configuration file** and check that it does not disable any of the features you use. 
-- In a corporate environment, **adjust the settings according to your security policy.**
-- Please note that **the provided file disables automatic updates** in order to protect against a compromised version. This means **you'll be responsible for updating your package** on a regular basis. If you prefer, automatic updates can be re-enabled by modifying the configuration file.
-- Note that if the user or attacker has write access to the enforced configuration file, they will be able to alter the settings. This is why, in an corporate environment, **I recommend deploying this file via GPO**. For personal use, you should not use keepass with a local administrator account.
-- Administrators can **disallow running other copies of KeePass** and other applications (that support the KeePass database file format), if desired, e.g. using Application Control, AppLocker or Software Restriction Policies.
+The goal of this project is to disable unnecessary features and enable all security mechanisms that are not active by default, using the [enforced configuration file](https://keepass.info/help/kb/config_enf.html).
 
-### Existing installation
-You can just copy the *KeePass.config.enforced.xml* file to the root of the KeePass installation directory (this also works with portable versions).  
-**Settings will be applied at the next Keepass launch.**
+## General Considerations
 
-### Automatic installation
-You can use the **KeePass_Secure_Auto_Install.ps1** file to fully install and configure KeePass automatically !
-> If you don't want to, just copy the *KeePass.config.enforced.xml* file to the root of the KeePass installation directory.
+- Download KeePass **[from its official website](https://keepass.info)** only, and **[verify the integrity](https://keepass.info/integrity.html)** of the downloaded file.
+- If using the portable version, **restrict write access to the KeePass installation directory** to your user account only, to protect the configuration file from tampering.
+- **Increase the key derivation iteration count** for your database (default: 60,000). Use the *1 Second Delay* button to set an appropriate value automatically.
+- **Lock the database** when not in use.
+- **Use a [key file](https://keepass.info/help/base/keys.html#keyfiles)** in addition to the master password. The key file must not be stored in the same location as the database.
+- **Consider KeePass 1.x**, which has a smaller feature set and a reduced attack surface. See the [edition comparison](https://keepass.info/compare.html).
 
-What the script does:
-1. **Download the latest version** of KeePass from its official website
-2. **Checks the integrity** of the file by comparing its hash
-3. **Copy the enforced configuration file**
-4. **Alter permissions** on the KeePass installation folder (remove all ACLs except the current user)
+> [KeePwn](https://github.com/Orange-Cyberdefense/KeePwn) is a Python tool that automates KeePass discovery and credential extraction — useful for understanding the threat model.
 
-#### Parameters
-- **ConfigFile** : Optional - path to the KeePass.config.enforced.xml *(Default : .\KeePass.config.enforced.xml)*
-- **EnforceACL** : Optional - secure KeePass installation directory using ACLs *(Default : False)*
+## Environment-Specific Considerations
 
-#### Run
-**Default** : `.\KeePass_Secure_Auto_Install.ps1`  
-**Custom** : `.\KeePass_Secure_Auto_Install.ps1 -ConfigFile "C:\path\to\file.xml" -EnforceACL $True`
+This project provides a baseline hardening configuration. Some settings may be incompatible with your environment or security policy.
+
+- **Review the configuration file** before deploying it to ensure it does not disable features required in your environment.
+- In a corporate environment, **adjust settings to match your security policy**.
+- The configuration **disables automatic updates** to protect against supply-chain attacks on the update mechanism. You are responsible for keeping KeePass up to date manually. Automatic updates can be re-enabled by removing the relevant entries from the file.
+- Any user with write access to the enforced configuration file can modify or remove it. In a corporate environment, **deploy this file via Group Policy (GPO)**. For personal use, avoid running KeePass under a local administrator account.
+- Administrators may **restrict execution of other KeePass-compatible clients** using Application Control, AppLocker, or Software Restriction Policies.
+
+## Existing Installation
+
+Copy [KeePass.config.enforced.xml](KeePass.config.enforced.xml) to the root of the KeePass installation directory. This also works with portable installations.  
+**Settings take effect on the next KeePass launch.**
+
+## Automatic Installation
+
+The **KeePass_Secure_Auto_Install.ps1** script fully automates the installation and configuration of KeePass.
+
+The script performs the following steps:
+1. **Downloads** the latest KeePass version from the official website
+2. **Verifies** file integrity by comparing the SHA-256 hash against the official value
+3. **Copies** the enforced configuration file to the installation directory
+4. **Restricts** permissions on the KeePass installation folder (optional, see `-EnforceACL`)
+
+### Parameters
+
+| Parameter | Required | Default | Description |
+|-----------|----------|---------|-------------|
+| `-ConfigFile` | No | `.\KeePass.config.enforced.xml` | Path to the enforced configuration file |
+| `-EnforceACL` | No | `$false` | Restrict the KeePass installation directory to the current user only |
+
+### Usage
+
+```powershell
+# Default
+.\KeePass_Secure_Auto_Install.ps1
+
+# With a custom configuration file and ACL enforcement
+.\KeePass_Secure_Auto_Install.ps1 -ConfigFile "C:\path\to\file.xml" -EnforceACL $true
+```
 
 [![](https://github.com/onSec-fr/Keepass-Enhanced-Security-Configuration/blob/main/res/auto_install.gif?raw=true)](https://github.com/onSec-fr/Keepass-Enhanced-Security-Configuration/blob/main/res/auto_install.png?raw=true)
 
-### Configuration file
-From [official documentation ](https://keepass.info/help/kb/config_enf.html#info "official documentation "): 
+## Configuration File
+
+From the [official documentation](https://keepass.info/help/kb/config_enf.html#info):
+
 > The format of an enforced configuration file is basically the same as the format of a regular configuration file. An enforced configuration file must be stored in the KeePass application directory (which contains KeePass.exe). Its name depends on the KeePass edition:
 > - KeePass 1.x: KeePass.enforced.ini.
 > - KeePass 2.x: KeePass.config.enforced.xml.
 
-#### Sample file
-Here is an example file, which embeds most of the important security mechanisms, and disables dangerous features :
+### Sample File
+
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <Configuration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -165,92 +185,101 @@ Here is an example file, which embeds most of the important security mechanisms,
 </Configuration>
 ```
 
-#### Settings description 
-This table lists all parameters used in the sample :
-| XPath | Parameter | Example Value | Description |
-|-------|-----------|---------------|---------------------|
-| `/Configuration/Application/TriggerSystem/Enabled` | TriggerSystem Enabled | `false` | Disables or enables the trigger system. If `false`, no automated triggers are executed. |
-| `/Configuration/Application/TriggerSystem/Triggers` | Triggers (with `MergeContentMode="Replace"`) | *(empty list)* | Replaces all triggers with an empty list, effectively removing any existing triggers. |
+### Settings Description
+
+| XPath | Parameter | Value | Description |
+|-------|-----------|-------|-------------|
+| `/Configuration/Application/TriggerSystem/Enabled` | TriggerSystem Enabled | `false` | Disables the trigger system entirely. No automated triggers are executed. |
+| `/Configuration/Application/TriggerSystem/Triggers` | Triggers (`MergeContentMode="Replace"`) | *(empty)* | Replaces the trigger list with an empty one, removing any pre-existing triggers. |
 | `/Configuration/Application/Start/CheckForUpdate` | CheckForUpdate | `false` | Disables automatic update checks. Updates must be performed manually. |
-| `/Configuration/Application/Start/CheckForUpdateConfigured` | CheckForUpdateConfigured | `true` | Marks the update check setting as configured and enforces its value. |
-| `/Configuration/UI/UIFlags` | UIFlags | `102` | Bitmask controlling UI elements. `2`=hide Plugins, `4`=hide Triggers, `32`=hide “Check for Updates”, `64`=hide “XML Replace”. Total: 2+4+32+64=102. |
-| `/Configuration/Security/Policy/ChangeMasterKeyNoKey` | ChangeMasterKeyNoKey | `false` | Prevents changing the master key without entering the current key. |
-| `/Configuration/Security/Policy/PrintNoKey` | PrintNoKey | `false` | Disallows printing when the database is not unlocked. |
-| `/Configuration/Security/Policy/EditTriggers` | EditTriggers | `false` | Prevents editing or creating triggers. |
-| `/Configuration/Security/Policy/Plugins` | Plugins | `false` | Disables the use of plugins. |
-| `/Configuration/Security/Policy/Export` | Export | `false` | Disables exporting entries. |
-| `/Configuration/Security/Policy/ExportNoKey` | ExportNoKey | `false` | Disallows export operations when the database is not unlocked. |
-| `/Configuration/Security/Policy/Import` | Import | `false` | Disables importing of entries. |
-| `/Configuration/Security/Policy/Print` | Print | `false` | Disables printing of entries. |
-| `/Configuration/Security/Policy/CopyWholeEntries` | CopyWholeEntries | `false` | Prevents copying complete entries (username+password). |
+| `/Configuration/Application/Start/CheckForUpdateConfigured` | CheckForUpdateConfigured | `true` | Marks the update check setting as configured, preventing KeePass from prompting the user. |
+| `/Configuration/UI/UIFlags` | UIFlags | `102` | Bitmask hiding UI menu items. `2`=Plugins, `4`=Triggers, `32`=Check for Updates, `64`=XML Replace. Total: 2+4+32+64=102. |
+| `/Configuration/Security/Policy/ChangeMasterKeyNoKey` | ChangeMasterKeyNoKey | `false` | Prevents changing the master key without first entering the current one. |
+| `/Configuration/Security/Policy/PrintNoKey` | PrintNoKey | `false` | Disallows printing when the database is locked. |
+| `/Configuration/Security/Policy/EditTriggers` | EditTriggers | `false` | Prevents creating or editing triggers. |
+| `/Configuration/Security/Policy/Plugins` | Plugins | `false` | Disables plugin support entirely. |
+| `/Configuration/Security/Policy/Export` | Export | `false` | Disables database export. |
+| `/Configuration/Security/Policy/ExportNoKey` | ExportNoKey | `false` | Disallows export when the database is locked. |
+| `/Configuration/Security/Policy/Import` | Import | `false` | Disables database import. |
+| `/Configuration/Security/Policy/Print` | Print | `false` | Disables entry printing. |
+| `/Configuration/Security/Policy/CopyWholeEntries` | CopyWholeEntries | `false` | Prevents copying complete entries (username and password combined). |
 | `/Configuration/Security/Policy/DragDrop` | DragDrop | `false` | Disables drag-and-drop of entries. |
-| `/Configuration/Security/Policy/UnhidePasswords` | UnhidePasswords | `false` | Disallows unmasking of password fields. |
-| `/Configuration/Security/Policy/AutoTypeWithoutContext` | AutoTypeWithoutContext | `false` | Disables global auto-type hotkey when no target window is identified. Prevents credential injection into unintended windows (known attack vector). |
+| `/Configuration/Security/Policy/UnhidePasswords` | UnhidePasswords | `false` | Prevents unmasking of password fields. |
+| `/Configuration/Security/Policy/AutoTypeWithoutContext` | AutoTypeWithoutContext | `false` | Disables the global auto-type hotkey when no target window is matched, preventing credential injection into unintended windows. |
 | `/Configuration/Security/WorkspaceLocking/LockOnSessionSwitch` | LockOnSessionSwitch | `true` | Locks the workspace when switching user sessions. |
-| `/Configuration/Security/WorkspaceLocking/LockOnSuspend` | LockOnSuspend | `true` | Locks KeePass when the system goes into suspend/sleep mode. |
-| `/Configuration/Security/WorkspaceLocking/LockAfterTime` | LockAfterTime | `3600` | Locks KeePass after 3600 seconds (1 hour) of KeePass inactivity. |
-| `/Configuration/Security/WorkspaceLocking/LockAfterGlobalTime` | LockAfterGlobalTime | `600` | Locks KeePass after 600 seconds (10 min) of global system inactivity. |
-| `/Configuration/Security/WorkspaceLocking/LockOnRemoteControlChange` | LockOnRemoteControlChange | `true` | Locks KeePass when remote control status changes (e.g., Remote Desktop). |
-| `/Configuration/Security/MasterPassword/MinimumLength` | MinimumLength | `16` | Requires master password to be at least 16 characters long. |
-| `/Configuration/Security/MasterPassword/MinimumQuality` | MinimumQuality | `80` | Enforces minimum quality/entropy for the master password. |
-| `/Configuration/Security/MasterPassword/RememberWhileOpen` | RememberWhileOpen | `false` | Prevents KeePass from storing the master password in memory while database is open. |
-| `/Configuration/Security/MasterKeyOnSecureDesktop` | MasterKeyOnSecureDesktop | `true` | Enables secure desktop for master key entry to protect against keyloggers. |
-| `/Configuration/Security/ClipboardClearAfterSeconds` | ClipboardClearAfterSeconds | `10` | Clears clipboard contents after 10 seconds. |
-| `/Configuration/Security/ProtectProcessWithDacl` | ProtectProcessWithDacl | `true` | Restricts other processes from accessing KeePass memory via DACL protection. |
-| `/Configuration/Security/PreventScreenCapture` | PreventScreenCapture | `true` | Prevents screen capturing of KeePass windows. |
-| `/Configuration/PasswordGenerator/AutoGeneratedPasswordsProfile/GeneratorType` | GeneratorType | `CharSet` | Uses character set–based password generation. |
-| `/Configuration/PasswordGenerator/AutoGeneratedPasswordsProfile/Length` | Length | `12` | Default length for generated passwords. |
-| `/Configuration/PasswordGenerator/AutoGeneratedPasswordsProfile/CharSetRanges` | CharSetRanges | `ULDS______` | Character sets used: U=uppercase, L=lowercase, D=digits, S=specials. |
-| `/Configuration/PasswordGenerator/AutoGeneratedPasswordsProfile/ExcludeLookAlike` | ExcludeLookAlike | `true` | Excludes look-alike characters (`O/0`, `l/1`) from generated passwords. |
-| `/Configuration/PasswordGenerator/AutoGeneratedPasswordsProfile/NoRepeatingCharacters` | NoRepeatingCharacters | `true` | Ensures no repeating characters in generated passwords. |
-| `/Configuration/Integration/ProxyType` | ProxyType | `System` | Uses system proxy configuration for connections. |
-| `/Configuration/Integration/ProxyAuthType` | ProxyAuthType | `Auto` | Uses automatic proxy authentication method. |
+| `/Configuration/Security/WorkspaceLocking/LockOnSuspend` | LockOnSuspend | `true` | Locks KeePass when the system suspends or hibernates. |
+| `/Configuration/Security/WorkspaceLocking/LockAfterTime` | LockAfterTime | `3600` | Locks KeePass after 3,600 seconds (1 hour) of KeePass inactivity. |
+| `/Configuration/Security/WorkspaceLocking/LockAfterGlobalTime` | LockAfterGlobalTime | `600` | Locks KeePass after 600 seconds (10 minutes) of system-wide inactivity. |
+| `/Configuration/Security/WorkspaceLocking/LockOnRemoteControlChange` | LockOnRemoteControlChange | `true` | Locks KeePass when the remote control state changes (e.g., an RDP session connects or disconnects). |
+| `/Configuration/Security/MasterPassword/MinimumLength` | MinimumLength | `16` | Requires the master password to be at least 16 characters long. |
+| `/Configuration/Security/MasterPassword/MinimumQuality` | MinimumQuality | `80` | Enforces a minimum password quality score of 80. |
+| `/Configuration/Security/MasterPassword/RememberWhileOpen` | RememberWhileOpen | `false` | Prevents KeePass from caching the master key in memory while the database is open. |
+| `/Configuration/Security/MasterKeyOnSecureDesktop` | MasterKeyOnSecureDesktop | `true` | Displays the master key prompt on the Windows secure desktop, protecting entry against most keyloggers. |
+| `/Configuration/Security/ClipboardClearAfterSeconds` | ClipboardClearAfterSeconds | `10` | Clears clipboard contents 10 seconds after a field is copied. |
+| `/Configuration/Security/ProtectProcessWithDacl` | ProtectProcessWithDacl | `true` | Applies a restrictive DACL to the KeePass process, blocking other processes from reading its memory. |
+| `/Configuration/Security/PreventScreenCapture` | PreventScreenCapture | `true` | Prevents screen capture of KeePass windows. |
+| `/Configuration/PasswordGenerator/AutoGeneratedPasswordsProfile/GeneratorType` | GeneratorType | `CharSet` | Uses character set-based password generation. |
+| `/Configuration/PasswordGenerator/AutoGeneratedPasswordsProfile/Length` | Length | `12` | Default length for auto-generated passwords. |
+| `/Configuration/PasswordGenerator/AutoGeneratedPasswordsProfile/CharSetRanges` | CharSetRanges | `ULDS______` | Character sets used: U=uppercase, L=lowercase, D=digits, S=special characters. |
+| `/Configuration/PasswordGenerator/AutoGeneratedPasswordsProfile/ExcludeLookAlike` | ExcludeLookAlike | `true` | Excludes visually similar characters (e.g., `O`/`0`, `l`/`1`). |
+| `/Configuration/PasswordGenerator/AutoGeneratedPasswordsProfile/NoRepeatingCharacters` | NoRepeatingCharacters | `true` | Ensures no character appears more than once in a generated password. |
+| `/Configuration/Integration/ProxyType` | ProxyType | `System` | Uses the system proxy configuration. |
+| `/Configuration/Integration/ProxyAuthType` | ProxyAuthType | `Auto` | Uses automatic proxy authentication. |
 
+### Screenshots
 
-#### Screenshots
-- As you can see the settings are now enforced :
+Enforced settings in the KeePass options dialog:
 
 [![](https://github.com/onSec-fr/Keepass-Enhanced-Security-Configuration/blob/main/res/enforced_settings.png?raw=true)](https://github.com/onSec-fr/Keepass-Enhanced-Security-Configuration/blob/main/res/enforced_settings.png?raw=true)
 
-- KeePass process is now protected from dumping and alteration :
+KeePass process protected against memory dumping and alteration:
 
 [![](https://github.com/onSec-fr/Keepass-Enhanced-Security-Configuration/blob/main/res/after_dacl_protect.png?raw=true)](https://github.com/onSec-fr/Keepass-Enhanced-Security-Configuration/blob/main/res/after_dacl_protect.png?raw=true)
 
-- Plugins and others specified settings are now disallowed :
+Restricted operations (plugins, export, and other disabled features):
 
 [![](https://github.com/onSec-fr/Keepass-Enhanced-Security-Configuration/blob/main/res/disallowed.png?raw=true)](https://github.com/onSec-fr/Keepass-Enhanced-Security-Configuration/blob/main/res/disallowed.png?raw=true)
 
-#### More settings
-Some settings are poorly documented, but if you want to play around, there is a way :
-> In order to create an enforced configuration file, we recommend the following procedure:
-> 1. Download the portable ZIP package of KeePass and unpack it. Run KeePass, configure everything as you wish, and exit it.
-> 2. Rename the configuration file to the enforced configuration file name.
-> 3. Open the enforced configuration file with a text editor and delete all settings that you do not want to enforce.
+### Additional Settings
+
+Not all KeePass settings are exposed in the UI or formally documented. To discover additional enforceable options, follow the procedure recommended in the official documentation:
+
+> 1. Download the portable ZIP package of KeePass and unpack it. Run KeePass, configure everything as desired, and exit.
+> 2. Rename the resulting configuration file to the enforced configuration file name.
+> 3. Open the file in a text editor and remove any settings you do not wish to enforce.
 >
-> **Note that not all parameters are accessible from the UI**
+> **Note:** not all settings are configurable through the UI.
 
-### References
-- Official KeePass Website : https://keepass.info
-- Enforced configuration official documentation : https://keepass.info/help/kb/config_enf.html
-- Customization official documentation : https://keepass.info/help/v2_dev/customize.html
+## References
 
-### Resources
-- A case study in Attacking KeePass (@HarmJ0y) : https://blog.harmj0y.net/redteaming/keethief-a-case-study-in-attacking-keepass-part-2/
-- Another case study in Attacking Keepass (@HarmJ0y) : https://www.slideshare.net/harmj0y/a-case-study-in-attacking-keepass
-- KeePwn : https://github.com/Orange-Cyberdefense/KeePwn
-- Webinar "Attaquer et durcir KeePass" (Hamza Kondah) : https://www.linkedin.com/events/7098643529362468864
+- [KeePass official website](https://keepass.info)
+- [Enforced configuration documentation](https://keepass.info/help/kb/config_enf.html)
+- [Customization documentation](https://keepass.info/help/v2_dev/customize.html)
 
-### FAQ
-> Am I protected from keyloggers using this configuration ?
-- **Yes and no**. Most currently available keyloggers work only on normal desktops; they do not capture keypresses on secure desktops. So, if you enable the MasterKeyOnSecureDesktop setting, the master key is protected against most keyloggers.
+## Resources
 
-> Is my keepass database protected from an attacker who has access to my machine?
-- **Definitely not**. There are multiple ways to recover passwords in memory, or by abusing certain features. Note that if the attacker has write access to your configuration file, he can simply modify or delete it. 
+- [A Case Study in Attacking KeePass – Part 2](https://blog.harmj0y.net/redteaming/keethief-a-case-study-in-attacking-keepass-part-2/) (@HarmJ0y)
+- [A Case Study in Attacking KeePass – Slides](https://www.slideshare.net/harmj0y/a-case-study-in-attacking-keepass) (@HarmJ0y)
+- [KeePwn](https://github.com/Orange-Cyberdefense/KeePwn) – automated KeePass discovery and credential extraction
+- [Hardening KeePass configuration (IT-Connect, FR)](https://www.it-connect.fr/comment-durcir-la-configuration-de-keepass/)
+- [Webinar: Attaquer et durcir KeePass](https://www.linkedin.com/events/7098643529362468864) (Hamza Kondah)
 
-> Is there a better password manager for personal use ?
-- Everyone will have their own opinion on this. What I can say is that Keepass is a very good free and open source password manager. The product has been affected by [very few CVEs](https://www.cvedetails.com/vulnerability-list/vendor_id-12214/Keepass.html "[very few CVEs") over the past ten years. None of them were critical.
+## FAQ
 
-### TODO
+**Am I protected against keyloggers with this configuration?**
+
+Partially. Most keyloggers operate on the standard desktop and cannot capture keystrokes entered on the Windows secure desktop. Enabling `MasterKeyOnSecureDesktop` therefore protects master key entry against the majority of keyloggers.
+
+**Is my KeePass database protected if an attacker has access to my machine?**
+
+No. A local attacker has multiple avenues to recover credentials, including memory analysis and feature abuse. If the attacker has write access to the configuration file, they can simply modify or delete it.
+
+**Is there a better password manager for personal use?**
+
+KeePass is a solid, free, and open-source password manager with [very few CVEs](https://www.cvedetails.com/vulnerability-list/vendor_id-12214/Keepass.html) over its history, none of them critical. The appropriate choice depends on individual requirements and threat model.
+
+## TODO
+
 - Add mapping between known attacks and associated mitigations.
 
-[@onSec-fr](https://github.com/onSec-fr "@onSec-fr")
+[@onSec-fr](https://github.com/onSec-fr)
